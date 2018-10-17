@@ -13,6 +13,7 @@ const colors = require('chalk');
 const util = require('util');
 const child_process = require('child_process');
 const exec = util.promisify(child_process.exec);
+const resolve = require('path').resolve;
 
 // default options and values
 const defaultOptions = {
@@ -44,7 +45,7 @@ class W3CLinkChecker {
    * @return {[type]}         [description]
    */
   constructor(directory, options) {
-    this.directory = directory;
+    this.directory = resolve(directory);
     this.options = { ...defaultOptions, ...options };
 
     this.logger = this.options.logger;
