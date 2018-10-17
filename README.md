@@ -1,10 +1,10 @@
 # w3c-linkchecker-local
 
-Run w3c link checker on local directory. This is a wrapper command line of [w3c Link Checker](https://github.com/w3c/link-checker), so you need `checklink` command pre-installed.
+Run w3c link checker on local directory. This is a wrapper command line of [w3c Link Checker](https://github.com/w3c/link-checker), so you need `checklink` command pre-installed or have docker installed.
 
 ## Run CheckLink In Docker Container
 
-This image is created with ability to test local files.
+This image is created with ability to test local files. The docker image is published as [jackjiaibm/w3c-linkchecker](https://hub.docker.com/r/jackjiaibm/w3c-linkchecker/).
 
 - Build docker image: `docker build -t jackjiaibm/w3c-linkchecker .`
 - Start container: `docker run -it --rm jackjiaibm/w3c-linkchecker`
