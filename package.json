@@ -1,0 +1,43 @@
+{
+  "name": "w3c-linkchecker-local",
+  "version": "0.1.0",
+  "description": "Run w3c link checker on local directory",
+  "main": "src/index.js",
+  "bin": {
+    "w3c-linkchecker-local": "src/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackjia-ibm/w3c-linkchecker-local.git"
+  },
+  "keywords": [
+    "linkchecker",
+    "link checker",
+    "w3c",
+    "checklink",
+    "brokenlink",
+    "broken link"
+  ],
+  "author": {
+    "name": "Jack T. Jia",
+    "email": "jack.tiefeng-jia@ibm.com"
+  },
+  "license": "EPL-2.0",
+  "bugs": {
+    "url": "https://github.com/jackjia-ibm/w3c-linkchecker-local/issues"
+  },
+  "homepage": "https://github.com/jackjia-ibm/w3c-linkchecker-local#readme",
+  "devDependencies": {
+    "eslint": "^5.7.0"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "express": "^4.16.4",
+    "get-port": "^4.0.0",
+    "yargs": "^12.0.2"
+  }
+}
