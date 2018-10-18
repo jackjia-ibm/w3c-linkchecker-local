@@ -111,6 +111,10 @@ class W3CLinkChecker {
       };
     }
     if (result) {
+      if (result.stdout) {
+        // trim the stdout
+        result.stdout = result.stdout.trim();
+      }
       if (result.stderr) {
         this.options.verbose && this.logger.debug('%s %s %s', colors.yellow('[debug][W3CLinkChecker.runCommand]'), colors.magenta('[warn]'), result.stderr);
       } else if (!result.stdout) {
