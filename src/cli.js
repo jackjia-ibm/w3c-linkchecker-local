@@ -75,10 +75,11 @@ P()
         logger.error('- %s %s "%s" "%s" "%s"', error.source || '-', error.target || '-', error.lines || '-', error.code || '-', fragments.join(',') || '-');
       }
       process.exit(1);
-    } else {
-      argv.verbose && logger.debug('%s successfully exit', colors.yellow('[debug]'));
-      process.exit(0);
+      return;
     }
+
+    argv.verbose && logger.debug('%s successfully exit', colors.yellow('[debug]'));
+    process.exit(0);
   })
   .catch((err) => {
     if (err.stack) {
@@ -86,4 +87,5 @@ P()
     } else {
       logger.error('%s %s', colors.red('[error]'), err);
     }
+    process.exit(1);
   });
