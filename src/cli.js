@@ -61,10 +61,26 @@ P()
     return await wlc.check();
   })
   .then((result) => {
+    if (result && result.warnings && result.warnings.length) {
+      argv.verbose && logger.debug('%s Found warnings: %s', colors.yellow('[debug]'), JSON.stringify(result.warnings));
+
+      logger.info('Warning of broken links and other issues (source target lines code fragments):');
+      for (let warning of result.warnings) {
+        let fragments = [];
+        if (warning.fragments) {
+          for (let fragment of warning.fragments) {
+            fragments.push(`#${fragment.hash}`);
+          }
+        }
+        logger.info('- %s %s "%s" "%s" "%s"', warning.source || '-', warning.target || '-', warning.lines || '-', warning.code || '-', fragments.join(',') || '-');
+      }
+      logger.info();
+    }
+
     if (result && result.errors && result.errors.length) {
       argv.verbose && logger.debug('%s Found errors: %s', colors.yellow('[debug]'), JSON.stringify(result.errors));
 
-      logger.error('Broken links and other issues (source target lines code fragments):');
+      logger.error('Errors of broken links and other issues (source target lines code fragments):');
       for (let error of result.errors) {
         let fragments = [];
         if (error.fragments) {
@@ -74,6 +90,7 @@ P()
         }
         logger.error('- %s %s "%s" "%s" "%s"', error.source || '-', error.target || '-', error.lines || '-', error.code || '-', fragments.join(',') || '-');
       }
+      logger.error();
       process.exit(1);
       return;
     }

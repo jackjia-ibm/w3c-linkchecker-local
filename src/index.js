@@ -303,24 +303,28 @@ class W3CLinkChecker {
     }
 
     // filter out errors
+    let warnings = [];
     const filteredErrors = errors.filter((error) => {
       if (_this.options.ignoreRobotsForbidden && error && error.code &&
         error.code.indexOf('Forbidden by robots.txt') > -1) {
+        warnings.push(error);
         return false;
       }
       if (_this.options.ignoreBrokenFragments && error && error.todo &&
         error.todo.indexOf('broken URI fragments') > -1) {
+        warnings.push(error);
         return false;
       }
       if (_this.options.ignoreRedirection && error && error.code &&
         error.code.indexOf(' -> ') > -1) {
+        warnings.push(error);
         return false;
       }
 
       return true;
     });
 
-    return filteredErrors;
+    return { errors: filteredErrors, warnings, };
   }
 
   /**
@@ -399,9 +403,12 @@ class W3CLinkChecker {
       // run test
       const result = await this.spawnCommand(command, args);
       if (result && result.stdout) {
-        const errors = this.parseOutputErrors(result.stdout);
+        const { errors, warnings, } = this.parseOutputErrors(result.stdout);
         if (errors && errors.length > 0) {
           result.errors = errors;
+        }
+        if (warnings && warnings.length > 0) {
+          result.warnings = warnings;
         }
       }
 
