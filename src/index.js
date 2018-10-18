@@ -140,31 +140,29 @@ class W3CLinkChecker {
    * @return {Promise}     object of stdout and stderr if the command succeeds
    */
   spawnCommand(cmd, args) {
-    const _this = this;
-
     return new Promise((resolve, reject) => {
       const ps = child_process.spawn(cmd, args);
       let stdout = [],
         stderr = [];
 
       ps.stdout.on('data', function(data) {
-        _this.logger.info(data.toString());
+        process.stdout.write(data.toString());
         stdout.push(data.toString());
       });
 
       ps.stderr.on('data', function(data) {
-        _this.logger.info(colors.red(data.toString()));
+        process.stdout.write(colors.red(data.toString()));
         stderr.push(data.toString());
       });
 
       ps.on('error', (err) => {
-        _this.logger.info(err.toString());
+        process.stdout.write(colors.red(err.toString()));
         reject(err);
       });
 
       ps.on('close', function(code) {
         if (code === 0) {
-          resolve({ stdout: stdout.join('\n'), stderr: stderr.join('\n') });
+          resolve({ stdout: stdout.join(''), stderr: stderr.join('') });
         } else {
           reject(new Error(`Failed to run '${cmd}', exit code ${code}`));
         }
@@ -258,6 +256,7 @@ class W3CLinkChecker {
             errors.push(error);
             error = null;
           }
+          fragmentSection = false;
 
           error = {
             source: urlTested,

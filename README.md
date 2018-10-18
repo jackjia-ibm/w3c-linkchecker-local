@@ -36,7 +36,7 @@ npm install -g w3c-linkchecker-local
 
 After installed the NPM package, run `w3c-linkchecker-local --help` to check available options.
 
-Check [checklink manual](https://metacpan.org/pod/distribution/W3C-LinkChecker/bin/checklink.pod) for detail explanation on the options.
+Check [checklink manual](https://metacpan.org/release/W3C-LinkChecker) for detail explanation on the options.
 
 Example usage to validate links in my local docs directory:
 
