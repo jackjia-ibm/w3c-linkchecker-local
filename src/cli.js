@@ -61,10 +61,13 @@ P()
     return await wlc.check();
   })
   .then((result) => {
+    let hasWarnings = false;
     if (result && result.warnings && result.warnings.length) {
       argv.verbose && logger.debug('%s Found warnings: %s', colors.yellow('[debug]'), JSON.stringify(result.warnings));
 
-      logger.info('Warning(s) of broken links and other issues (source target lines code fragments):');
+      logger.info();
+      logger.info(colors.yellow('================================================================================='));
+      logger.info(colors.yellow('Warning(s) of broken links and other issues (source target lines code fragments):'));
       for (let warning of result.warnings) {
         let fragments = [];
         if (warning.fragments) {
@@ -74,13 +77,18 @@ P()
         }
         logger.info('- %s %s "%s" "%s" "%s"', warning.source || '-', warning.target || '-', warning.lines || '-', warning.code || '-', fragments.join(',') || '-');
       }
+      logger.info(colors.yellow(`Total ${result.warnings.length} warning(s).`));
       logger.info();
+
+      hasWarnings = true;
     }
 
     if (result && result.errors && result.errors.length) {
       argv.verbose && logger.debug('%s Found errors: %s', colors.yellow('[debug]'), JSON.stringify(result.errors));
 
-      logger.error('Error(s) of broken links and other issues (source target lines code fragments):');
+      logger.error();
+      logger.error(colors.red('==============================================================================='));
+      logger.error(colors.red('Error(s) of broken links and other issues (source target lines code fragments):'));
       for (let error of result.errors) {
         let fragments = [];
         if (error.fragments) {
@@ -90,9 +98,17 @@ P()
         }
         logger.error('- %s %s "%s" "%s" "%s"', error.source || '-', error.target || '-', error.lines || '-', error.code || '-', fragments.join(',') || '-');
       }
+      logger.error(colors.red(`Total ${result.warnings.length} error(s).`));
       logger.error();
       process.exit(1);
       return;
+    }
+
+    if (!hasWarnings) {
+      logger.info();
+      logger.info(colors.green('========================'));
+      logger.info(colors.green('Check ends successfully!'));
+      logger.info();
     }
 
     argv.verbose && logger.debug('%s successfully exit', colors.yellow('[debug]'));
