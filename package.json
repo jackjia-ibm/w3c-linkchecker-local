@@ -1,6 +1,6 @@
 {
   "name": "w3c-linkchecker-local",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Run w3c link checker on local directory",
   "main": "src/index.js",
   "bin": {
