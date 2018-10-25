@@ -7,7 +7,7 @@
     "w3c-linkchecker-local": "src/cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "lint": "eslint ."
   },
   "repository": {
@@ -32,7 +32,10 @@
   },
   "homepage": "https://github.com/jackjia-ibm/w3c-linkchecker-local#readme",
   "devDependencies": {
-    "eslint": "^5.7.0"
+    "chai": "^4.2.0",
+    "debug": "^4.1.0",
+    "eslint": "^5.7.0",
+    "mocha": "^5.2.0"
   },
   "dependencies": {
     "chalk": "^2.4.1",

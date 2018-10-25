@@ -64,7 +64,7 @@ P()
     if (result && result.warnings && result.warnings.length) {
       argv.verbose && logger.debug('%s Found warnings: %s', colors.yellow('[debug]'), JSON.stringify(result.warnings));
 
-      logger.info('Warning of broken links and other issues (source target lines code fragments):');
+      logger.info('Warning(s) of broken links and other issues (source target lines code fragments):');
       for (let warning of result.warnings) {
         let fragments = [];
         if (warning.fragments) {
@@ -80,7 +80,7 @@ P()
     if (result && result.errors && result.errors.length) {
       argv.verbose && logger.debug('%s Found errors: %s', colors.yellow('[debug]'), JSON.stringify(result.errors));
 
-      logger.error('Errors of broken links and other issues (source target lines code fragments):');
+      logger.error('Error(s) of broken links and other issues (source target lines code fragments):');
       for (let error of result.errors) {
         let fragments = [];
         if (error.fragments) {
