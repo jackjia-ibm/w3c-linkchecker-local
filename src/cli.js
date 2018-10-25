@@ -98,7 +98,7 @@ P()
         }
         logger.error('- %s %s "%s" "%s" "%s"', error.source || '-', error.target || '-', error.lines || '-', error.code || '-', fragments.join(',') || '-');
       }
-      logger.error(colors.red(`Total ${result.warnings.length} error(s).`));
+      logger.error(colors.red(`Total ${result.errors.length} error(s).`));
       logger.error();
       process.exit(1);
       return;
