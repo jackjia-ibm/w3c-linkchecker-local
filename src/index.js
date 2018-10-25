@@ -45,7 +45,7 @@ class W3CLinkChecker {
    * @return {[type]}         [description]
    */
   constructor(directory, options) {
-    this.directory = resolve(directory);
+    this.directory = directory;
     this.options = { ...defaultOptions, ...options };
 
     this.logger = this.options.logger;
@@ -334,6 +334,9 @@ class W3CLinkChecker {
   async check() {
     try {
       const isUrl = this.isUrl(this.directory);
+      if (!isUrl) {
+        this.directory = resolve(this.directory);
+      }
       const checklink = await this.locateW3cLinkChecker();
 
       this.logger.info('checking links of "%s" ...', colors.blue(this.directory));
