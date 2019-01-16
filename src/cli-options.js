@@ -19,6 +19,11 @@ const CliOptions = {
     type: 'boolean',
     default: false,
   },
+  'base-domain': {
+    description: 'Serve files using alternative base domain.',
+    type: 'string',
+    default: 'localhost',
+  },
   'base-url': {
     description: 'Serve files using alternative base url.',
     type: 'string',

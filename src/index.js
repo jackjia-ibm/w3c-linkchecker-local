@@ -22,6 +22,7 @@ const defaultOptions = {
   verbose: false,
   noColor: false,
 
+  baseDomain: 'localhost',
   baseUrl: '/',
   checklinkCommand: null,
 
@@ -357,7 +358,7 @@ class W3CLinkChecker {
           args = [...args,
             '-v', `${this.directory}:/usr/share/nginx/html${this.options.baseUrl}`,
             DOCKER_IMAGE,
-            `http://localhost${this.options.baseUrl}`,
+            `http://${this.options.baseDomain}${this.options.baseUrl}`,
             ...CheckLinkOptions,
           ];
         }
@@ -373,7 +374,7 @@ class W3CLinkChecker {
           await this.startHttpServer(this.directory, this.options.baseUrl, port);
 
           args = [...args,
-            `http://localhost:${port}${this.options.baseUrl}`,
+            `http://${this.options.baseDomain}:${port}${this.options.baseUrl}`,
             ...CheckLinkOptions,
           ];
         }
