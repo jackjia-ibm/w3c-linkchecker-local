@@ -349,7 +349,7 @@ class W3CLinkChecker {
         command = 'docker';
         args = ['run', '--rm'];
         if (this.options.baseDomain !== 'localhost') {
-          args.push(`--add-host="${this.options.baseDomain}:127.0.0.1"`);
+          args.push(`--add-host=${this.options.baseDomain}:127.0.0.1`);
         }
         if (isUrl) {
           args = [...args,
