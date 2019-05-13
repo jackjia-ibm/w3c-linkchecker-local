@@ -29,6 +29,10 @@ const CliOptions = {
     type: 'string',
     default: '/',
   },
+  'start-point': {
+    description: 'Start test with this endpoint. If specified, the test will start from here instead of base-url.',
+    type: 'string',
+  },
   'checklink-command': {
     description: 'W3C checklink command location.',
     type: 'string',

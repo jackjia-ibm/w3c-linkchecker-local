@@ -24,6 +24,7 @@ const defaultOptions = {
 
   baseDomain: 'localhost',
   baseUrl: '/',
+  startPoint: null,
   checklinkCommand: null,
 
   ignoreRobotsForbidden: false,
@@ -361,7 +362,7 @@ class W3CLinkChecker {
           args = [...args,
             '-v', `${this.directory}:/usr/share/nginx/html${this.options.baseUrl}`,
             DOCKER_IMAGE,
-            `http://${this.options.baseDomain}${this.options.baseUrl}`,
+            `http://${this.options.baseDomain}${this.options.startPoint ? this.options.startPoint : this.options.baseUrl}`,
             ...CheckLinkOptions,
           ];
         }
@@ -377,7 +378,7 @@ class W3CLinkChecker {
           await this.startHttpServer(this.directory, this.options.baseUrl, port);
 
           args = [...args,
-            `http://${this.options.baseDomain}:${port}${this.options.baseUrl}`,
+            `http://${this.options.baseDomain}:${port}${this.options.startPoint ? this.options.startPoint : this.options.baseUrl}`,
             ...CheckLinkOptions,
           ];
         }
